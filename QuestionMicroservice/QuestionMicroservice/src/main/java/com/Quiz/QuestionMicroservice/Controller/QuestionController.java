@@ -7,6 +7,7 @@ import com.Quiz.QuestionMicroservice.Service.QuestionService;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,13 @@ import java.util.List;
 public class QuestionController {
 
 
-    @Autowired
+//    @Autowired
 //    PdfParsingService pdfParsingService;
+
+            @Autowired
+            Environment environment;
+
+
 
     private final QuestionService questionService;
 
@@ -59,6 +65,7 @@ public class QuestionController {
 
     @PostMapping("getQuestions")
     public ResponseEntity<List<QuestionDTO>> getQuestionFromId(@RequestBody List<ObjectId> qIds){
+        System.out.println(environment.getProperty("local.server.port"));
         return  questionService.getQuestionFromId(qIds);
     }
 
